@@ -48,13 +48,12 @@ public class ClientResource {
      */
     @PostMapping("/clients")
     @Timed
-    public ResponseEntity<Client> createClient(@RequestBody @ModelAttribute Client client,  Model model) throws URISyntaxException {
+    public ResponseEntity<Client> createClient(@RequestBody Client client,  Model model) throws URISyntaxException {
         log.debug("REST request to save Client : {}", client);
         if (client.getId() != null) {
             throw new BadRequestAlertException("A new client cannot already have an ID", ENTITY_NAME, "idexists");
         }
 
-        model.addAttribute("client", client);
         Client result = clientService.save(client);
         return ResponseEntity.created(new URI("/api/clients/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

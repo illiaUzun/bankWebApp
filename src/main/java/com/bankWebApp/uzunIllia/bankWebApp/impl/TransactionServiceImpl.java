@@ -6,6 +6,7 @@ import com.bankWebApp.uzunIllia.bankWebApp.service.TransactionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -22,11 +23,8 @@ public class TransactionServiceImpl implements TransactionService {
 
     private final Logger log = LoggerFactory.getLogger(TransactionServiceImpl.class);
 
-    private final TransactionRepository transactionRepository;
-
-    public TransactionServiceImpl(TransactionRepository transactionRepository) {
-        this.transactionRepository = transactionRepository;
-    }
+    @Autowired
+    private TransactionRepository transactionRepository;
 
     /**
      * Save a transaction.

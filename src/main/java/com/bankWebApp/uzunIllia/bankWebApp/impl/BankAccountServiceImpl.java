@@ -5,27 +5,30 @@ import com.bankWebApp.uzunIllia.bankWebApp.repository.BankAccountRepository;
 import com.bankWebApp.uzunIllia.bankWebApp.service.BankAccountService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.util.Optional;
 
 /**
  * Service Implementation for managing BankAccount.
  */
+
 @Service
 @Transactional
 public class BankAccountServiceImpl implements BankAccountService {
 
     private final Logger log = LoggerFactory.getLogger(BankAccountServiceImpl.class);
 
-    private final BankAccountRepository bankAccountRepository;
+    @Autowired
+    BankAccountRepository bankAccountRepository;
 
-    public BankAccountServiceImpl(BankAccountRepository bankAccountRepository) {
-        this.bankAccountRepository = bankAccountRepository;
-    }
 
     /**
      * Save a bankAccount.

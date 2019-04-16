@@ -5,6 +5,7 @@ import com.bankWebApp.uzunIllia.bankWebApp.repository.ClientRepository;
 import com.bankWebApp.uzunIllia.bankWebApp.service.ClientService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -21,11 +22,8 @@ public class ClientServiceImpl implements ClientService {
 
     private final Logger log = LoggerFactory.getLogger(ClientServiceImpl.class);
 
-    private final ClientRepository clientRepository;
-
-    public ClientServiceImpl(ClientRepository clientRepository) {
-        this.clientRepository = clientRepository;
-    }
+    @Autowired
+    private ClientRepository clientRepository;
 
     /**
      * Save a client.

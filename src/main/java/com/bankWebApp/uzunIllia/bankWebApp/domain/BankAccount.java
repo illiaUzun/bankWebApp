@@ -29,7 +29,7 @@ public class BankAccount implements Serializable {
     @Column(name = "account_id")
     private Integer accountID;
 
-    @Column(name = "client_id")
+    @Column(name = "client_id", insertable = false, updatable = false)
     private Integer clientID;
 
     @Column(name = "money_ammount", precision = 10, scale = 2)
@@ -127,7 +127,6 @@ public class BankAccount implements Serializable {
     public void setClient(Client client) {
         this.client = client;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
     public boolean equals(Object o) {

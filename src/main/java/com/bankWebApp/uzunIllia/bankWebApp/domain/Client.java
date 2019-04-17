@@ -24,9 +24,6 @@ public class Client implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "client_id")
-    private Integer clientID;
-
     @Column(name = "client_name")
     private String clientName;
 
@@ -37,25 +34,25 @@ public class Client implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<BankAccount> bankAccounts = new HashSet<>();
 
+    public Client() {
+    }
+
+    public Client(String clientName, Integer clientAge, Set<BankAccount> bankAccounts) {
+        this.clientName = clientName;
+        this.clientAge = clientAge;
+        this.bankAccounts = bankAccounts;
+    }
+
+    public int getAccountNum(){
+        return bankAccounts.size();
+    }
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Integer getClientID() {
-        return clientID;
-    }
-
-    public Client clientID(Integer clientID) {
-        this.clientID = clientID;
-        return this;
-    }
-
-    public void setClientID(Integer clientID) {
-        this.clientID = clientID;
     }
 
     public String getClientName() {
@@ -66,6 +63,7 @@ public class Client implements Serializable {
         this.clientName = clientName;
         return this;
     }
+
 
     public void setClientName(String clientName) {
         this.clientName = clientName;
@@ -133,7 +131,6 @@ public class Client implements Serializable {
     public String toString() {
         return "Client{" +
                 "id=" + getId() +
-                ", clientID=" + getClientID() +
                 ", clientName='" + getClientName() + "'" +
                 ", clientAge=" + getClientAge() +
                 "}";

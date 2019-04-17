@@ -9,16 +9,16 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <title>Добавление студента</title>
+    <title>Добавление клиента</title>
 </head>
 <body class="bg-light">
 <div class="container">
     <div class="py-5 text-center">
-        <h2>Добавление студента</h2>
-        <p class="lead">Заполните поля и нажмите кнопку 'Добавить студента'</p>
+        <h2>Добавление клиента</h2>
+        <p class="lead">Заполните поля и нажмите кнопку 'Добавить клиента'</p>
     </div>
 
-    <form method="post" class="needs-validation" novalidate>
+    <form enctype="multipart/form-data" action="#" th:action="@{/add_client}" th:object="${client}" method="post" class="needs-validation" novalidate>
         <div class="row">
             <div class="col-md-12">
                 <h4 class="mb-3">Поля для заполнения</h4>
@@ -26,40 +26,17 @@
                 <div class="row">
 
                     <div class="col-md-4 mb-3">
-                        <label for="lastName">Фамилия</label>
-                        <input type="text" class="form-control" id="lastName" placeholder=""
+                        <label for="clientName">Имя</label>
+                        <input th:field="*{clientName}" type="text" class="form-control" id="clientName" placeholder=""
                                value="" required>
                     </div>
-
 
                     <div class="col-md-4 mb-3">
-                        <label for="firstName">Имя</label>
-                        <input type="text" class="form-control" id="firstName" placeholder=""
+                        <label for="clientAge">Возраст</label>
+                        <input th:field="*{clientAge}" type="text" class="form-control" id="clientAge" placeholder=""
                                value="" required>
                     </div>
-                    <div class="col-md-4 mb-3">
-                        <label for="patronymic">Отчество</label>
-                        <input type="text" class="form-control" id="patronymic" placeholder=""
-                               value="" required>
-                    </div>
-                </div>
 
-                <div class="mb-3">
-                    <label for="email">Электронная почта</label>
-                    <input type="email" class="form-control" id="email"
-                           placeholder="" value="" required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="phone">Телефон</label>
-                    <input type="text" class="form-control" id="phone"
-                           placeholder="(ХХХ) ХХХ-ХХХХ" value="" required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="address">Домашний адрес</label>
-                    <input type="text" class="form-control" id="address" placeholder="" value=""
-                           required>
                 </div>
 
                 <hr class="mb-4">

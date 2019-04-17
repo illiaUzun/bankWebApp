@@ -82,7 +82,6 @@ public class ClientResourceIntTest {
      */
     public static Client createEntity(EntityManager em) {
         Client client = new Client()
-            .clientID(DEFAULT_CLIENT_ID)
             .clientName(DEFAULT_CLIENT_NAME)
             .clientAge(DEFAULT_CLIENT_AGE);
         return client;
@@ -108,7 +107,6 @@ public class ClientResourceIntTest {
         List<Client> clientList = clientRepository.findAll();
         assertThat(clientList).hasSize(databaseSizeBeforeCreate + 1);
         Client testClient = clientList.get(clientList.size() - 1);
-        assertThat(testClient.getClientID()).isEqualTo(DEFAULT_CLIENT_ID);
         assertThat(testClient.getClientName()).isEqualTo(DEFAULT_CLIENT_NAME);
         assertThat(testClient.getClientAge()).isEqualTo(DEFAULT_CLIENT_AGE);
     }
@@ -185,7 +183,6 @@ public class ClientResourceIntTest {
         // Disconnect from session so that the updates on updatedClient are not directly saved in db
         em.detach(updatedClient);
         updatedClient
-            .clientID(UPDATED_CLIENT_ID)
             .clientName(UPDATED_CLIENT_NAME)
             .clientAge(UPDATED_CLIENT_AGE);
 
@@ -198,7 +195,6 @@ public class ClientResourceIntTest {
         List<Client> clientList = clientRepository.findAll();
         assertThat(clientList).hasSize(databaseSizeBeforeUpdate);
         Client testClient = clientList.get(clientList.size() - 1);
-        assertThat(testClient.getClientID()).isEqualTo(UPDATED_CLIENT_ID);
         assertThat(testClient.getClientName()).isEqualTo(UPDATED_CLIENT_NAME);
         assertThat(testClient.getClientAge()).isEqualTo(UPDATED_CLIENT_AGE);
     }

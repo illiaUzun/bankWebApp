@@ -32,6 +32,15 @@ public interface BankAccountService {
 
 
     /**
+     * Get all bankAccounts of client "id".
+     *
+     * @param pageable the pagination information
+     * @return the list of entities
+     */
+    Page<BankAccount> findAllById(Pageable pageable, Long clientId);
+
+
+    /**
      * Get the "id" bankAccount.
      *
      * @param id the id of the entity

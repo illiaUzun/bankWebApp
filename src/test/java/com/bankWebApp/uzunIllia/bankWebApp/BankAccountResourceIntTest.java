@@ -40,8 +40,8 @@ public class BankAccountResourceIntTest {
     private static final Integer DEFAULT_ACCOUNT_ID = 1;
     private static final Integer UPDATED_ACCOUNT_ID = 2;
 
-    private static final Integer DEFAULT_CLIENT_ID = 1;
-    private static final Integer UPDATED_CLIENT_ID = 2;
+    private static final Long DEFAULT_CLIENT_ID = (long) 1;
+    private static final Long UPDATED_CLIENT_ID = (long) 2;
 
     private static final BigDecimal DEFAULT_MONEY_AMMOUNT = new BigDecimal(1);
     private static final BigDecimal UPDATED_MONEY_AMMOUNT = new BigDecimal(2);
@@ -85,7 +85,6 @@ public class BankAccountResourceIntTest {
      */
     public static BankAccount createEntity(EntityManager em) {
         BankAccount bankAccount = new BankAccount()
-            .accountID(DEFAULT_ACCOUNT_ID)
             .clientID(DEFAULT_CLIENT_ID)
             .moneyAmmount(DEFAULT_MONEY_AMMOUNT);
         return bankAccount;
@@ -111,7 +110,6 @@ public class BankAccountResourceIntTest {
         List<BankAccount> bankAccountList = bankAccountRepository.findAll();
         assertThat(bankAccountList).hasSize(databaseSizeBeforeCreate + 1);
         BankAccount testBankAccount = bankAccountList.get(bankAccountList.size() - 1);
-        assertThat(testBankAccount.getAccountID()).isEqualTo(DEFAULT_ACCOUNT_ID);
         assertThat(testBankAccount.getClientID()).isEqualTo(DEFAULT_CLIENT_ID);
         assertThat(testBankAccount.getMoneyAmmount()).isEqualTo(DEFAULT_MONEY_AMMOUNT);
     }
@@ -188,7 +186,6 @@ public class BankAccountResourceIntTest {
         // Disconnect from session so that the updates on updatedBankAccount are not directly saved in db
         em.detach(updatedBankAccount);
         updatedBankAccount
-            .accountID(UPDATED_ACCOUNT_ID)
             .clientID(UPDATED_CLIENT_ID)
             .moneyAmmount(UPDATED_MONEY_AMMOUNT);
 
@@ -201,7 +198,6 @@ public class BankAccountResourceIntTest {
         List<BankAccount> bankAccountList = bankAccountRepository.findAll();
         assertThat(bankAccountList).hasSize(databaseSizeBeforeUpdate);
         BankAccount testBankAccount = bankAccountList.get(bankAccountList.size() - 1);
-        assertThat(testBankAccount.getAccountID()).isEqualTo(UPDATED_ACCOUNT_ID);
         assertThat(testBankAccount.getClientID()).isEqualTo(UPDATED_CLIENT_ID);
         assertThat(testBankAccount.getMoneyAmmount()).isEqualTo(UPDATED_MONEY_AMMOUNT);
     }

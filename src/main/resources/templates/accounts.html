@@ -14,7 +14,7 @@
 <body class="bg-light">
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Банк</a>
+    <a class="navbar-brand" href="/">Банк</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05"
             aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -23,10 +23,10 @@
     <div class="collapse navbar-collapse" id="navbarsExample05">
         <ul class="navbar-nav mr-auto">
             <!--<li class="nav-item">-->
-                <!--<a class="nav-link" href="#">Главная</a>-->
+            <!--<a class="nav-link" href="#">Главная</a>-->
             <!--</li>-->
             <li class="nav-item active">
-                <a class="nav-link" href="#">Клиенты банка<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/">Клиенты банка<span class="sr-only">(current)</span></a>
             </li>
         </ul>
         <form class="form-inline mt-2 mt-md-0">
@@ -39,18 +39,19 @@
 <div class="container">
 
     <div class="py-5 text-center">
-        <h2>Просмотр инфорамации о клиентах</h2>
-        <p class="lead">На данной странице вы можете посмотреть информацию о клиентах банка</p>
+        <h2>Просмотр инфорамации о счетах клиента <span></span></h2>
+        <p class="lead">На данной странице вы можете посмотреть информацию о счетах клиента <span></span> </p>
     </div>
-
 
     <div class="row">
         <div class="col">
             <h2>Все клиенты:</h2>
         </div>
         <div class="col col-lg-3">
-            <a th:href="@{~/add_client}" class="btn btn-lg btn-block btn-outline-primary" role="button"
-               aria-disabled="true">Добавить клиента</a>
+            <!--хз почему не получается тут получать id-->
+            <!--<a th:href="@{~/add_account(id=${client.id})}" class="btn btn-lg btn-block btn-outline-primary" role="button"-->
+            <a th:href="@{~/add_account(id=${1})}" class="btn btn-lg btn-block btn-outline-primary" role="button"
+               aria-disabled="true">Добавить счет</a>
         </div>
 
     </div>
@@ -62,20 +63,20 @@
             <thead>
             <tr>
                 <th class="text-justify">#</th>
-                <th class="text-justify">Имя</th>
-                <th class="text-justify">Возраст</th>
-                <th class="text-justify">Количество счетов</th>
+                <th class="text-justify">Количество денег</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="client : ${clients}">
-                <td class="align-middle"><span th:text="${client.id}"/></td>
-                <td class="align-middle"><span th:text="${client.clientName}"/></td>
-                <td class="align-middle"><span th:text="${client.clientAge}"/></td>
-                <td class="align-middle"><span th:text="${client.getAccountNum()}"/></td>
+            <tr th:each="account : ${accounts}">
+
+                <!--Так должно быть!!!-->
+                <!--<td class="align-middle"><span th:text="${account.id}"/></td>-->
+                <!--<td class="align-middle"><span th:text="${account.moneyAmmount}"/></td>-->
+                <td class="align-middle"><span th:text="${account}"/></td>
+                <td class="align-middle"><span th:text="${account}"/></td>
                 <td class="align-middle">
-                    <a th:href="@{~/accounts(id=${client.id})}" class="btn btn-lg btn-block btn-outline-primary" role="button"
-                       aria-disabled="true">Счета</a>
+                    <a th:href="@{~/accounts}" class="btn btn-lg btn-block btn-outline-primary" role="button"
+                       aria-disabled="true">Транзакции</a>
                 </td>
             </tr>
             </tbody>

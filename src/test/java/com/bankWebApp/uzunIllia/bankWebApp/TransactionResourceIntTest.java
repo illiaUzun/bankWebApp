@@ -41,8 +41,8 @@ public class TransactionResourceIntTest {
     private static final Integer DEFAULT_TRANSACTION_ID = 1;
     private static final Integer UPDATED_TRANSACTION_ID = 2;
 
-    private static final Integer DEFAULT_ACCOUNT_ID = 1;
-    private static final Integer UPDATED_ACCOUNT_ID = 2;
+    private static final Long DEFAULT_ACCOUNT_ID = (long) 1;
+    private static final Long UPDATED_ACCOUNT_ID = (long) 2;
 
     private static final BigDecimal DEFAULT_MONEY_AMMOUNT = new BigDecimal(1);
     private static final BigDecimal UPDATED_MONEY_AMMOUNT = new BigDecimal(2);
@@ -92,7 +92,6 @@ public class TransactionResourceIntTest {
      */
     public static Transaction createEntity(EntityManager em) {
         Transaction transaction = new Transaction()
-            .transactionID(DEFAULT_TRANSACTION_ID)
             .accountID(DEFAULT_ACCOUNT_ID)
             .moneyAmmount(DEFAULT_MONEY_AMMOUNT)
             .type(DEFAULT_TYPE)
@@ -120,7 +119,6 @@ public class TransactionResourceIntTest {
         List<Transaction> transactionList = transactionRepository.findAll();
         assertThat(transactionList).hasSize(databaseSizeBeforeCreate + 1);
         Transaction testTransaction = transactionList.get(transactionList.size() - 1);
-        assertThat(testTransaction.getTransactionID()).isEqualTo(DEFAULT_TRANSACTION_ID);
         assertThat(testTransaction.getAccountID()).isEqualTo(DEFAULT_ACCOUNT_ID);
         assertThat(testTransaction.getMoneyAmmount()).isEqualTo(DEFAULT_MONEY_AMMOUNT);
         assertThat(testTransaction.getType()).isEqualTo(DEFAULT_TYPE);
@@ -203,7 +201,6 @@ public class TransactionResourceIntTest {
         // Disconnect from session so that the updates on updatedTransaction are not directly saved in db
         em.detach(updatedTransaction);
         updatedTransaction
-            .transactionID(UPDATED_TRANSACTION_ID)
             .accountID(UPDATED_ACCOUNT_ID)
             .moneyAmmount(UPDATED_MONEY_AMMOUNT)
             .type(UPDATED_TYPE)
@@ -218,7 +215,6 @@ public class TransactionResourceIntTest {
         List<Transaction> transactionList = transactionRepository.findAll();
         assertThat(transactionList).hasSize(databaseSizeBeforeUpdate);
         Transaction testTransaction = transactionList.get(transactionList.size() - 1);
-        assertThat(testTransaction.getTransactionID()).isEqualTo(UPDATED_TRANSACTION_ID);
         assertThat(testTransaction.getAccountID()).isEqualTo(UPDATED_ACCOUNT_ID);
         assertThat(testTransaction.getMoneyAmmount()).isEqualTo(UPDATED_MONEY_AMMOUNT);
         assertThat(testTransaction.getType()).isEqualTo(UPDATED_TYPE);

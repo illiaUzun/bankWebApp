@@ -38,7 +38,8 @@ public class BankAccountServiceImpl implements BankAccountService {
      */
     @Override
     public BankAccount save(BankAccount bankAccount) {
-        log.debug("Request to save BankAccount : {}", bankAccount);        return bankAccountRepository.save(bankAccount);
+        log.debug("Request to save BankAccount : {}", bankAccount);
+        return bankAccountRepository.save(bankAccount);
     }
 
     /**
@@ -54,6 +55,18 @@ public class BankAccountServiceImpl implements BankAccountService {
         return bankAccountRepository.findAll(pageable);
     }
 
+    /**
+     * Get all the bankAccounts of special client.
+     *
+     * @param clientId the pagination information
+     * @return the list of entities
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public Page<BankAccount> findAllById(Pageable pageable, Long clientId) {
+        log.debug("Request to get all BankAccounts");
+        return bankAccountRepository.findBankAccountsByClientID(pageable, clientId);
+    }
 
     /**
      * Get one bankAccount by id.

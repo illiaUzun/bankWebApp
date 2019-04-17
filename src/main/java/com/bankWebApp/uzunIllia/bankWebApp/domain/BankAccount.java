@@ -26,11 +26,8 @@ public class BankAccount implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "account_id")
-    private Integer accountID;
-
     @Column(name = "client_id", insertable = false, updatable = false)
-    private Integer clientID;
+    private Long clientID;
 
     @Column(name = "money_ammount", precision = 10, scale = 2)
     private BigDecimal moneyAmmount;
@@ -43,6 +40,16 @@ public class BankAccount implements Serializable {
     @JsonIgnoreProperties("bankAccounts")
     private Client client;
 
+    public BankAccount() {
+    }
+
+    public BankAccount(Long clientID, BigDecimal moneyAmmount, Set<Transaction> transactions, Client client) {
+        this.clientID = clientID;
+        this.moneyAmmount = moneyAmmount;
+        this.transactions = transactions;
+        this.client = client;
+    }
+
     public Long getId() {
         return id;
     }
@@ -51,29 +58,16 @@ public class BankAccount implements Serializable {
         this.id = id;
     }
 
-    public Integer getAccountID() {
-        return accountID;
-    }
-
-    public BankAccount accountID(Integer accountID) {
-        this.accountID = accountID;
-        return this;
-    }
-
-    public void setAccountID(Integer accountID) {
-        this.accountID = accountID;
-    }
-
-    public Integer getClientID() {
+    public Long getClientID() {
         return clientID;
     }
 
-    public BankAccount clientID(Integer clientID) {
+    public BankAccount clientID(Long clientID) {
         this.clientID = clientID;
         return this;
     }
 
-    public void setClientID(Integer clientID) {
+    public void setClientID(Long clientID) {
         this.clientID = clientID;
     }
 
@@ -152,7 +146,6 @@ public class BankAccount implements Serializable {
     public String toString() {
         return "BankAccount{" +
             "id=" + getId() +
-            ", accountID=" + getAccountID() +
             ", clientID=" + getClientID() +
             ", moneyAmmount=" + getMoneyAmmount() +
             "}";

@@ -25,11 +25,8 @@ public class Transaction implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "transaction_id")
-    private Integer transactionID;
-
     @Column(name = "account_id")
-    private Integer accountID;
+    private Long accountID;
 
     @Column(name = "money_ammount", precision = 10, scale = 2)
     private BigDecimal moneyAmmount;
@@ -45,6 +42,17 @@ public class Transaction implements Serializable {
     @JsonIgnoreProperties("transactions")
     private BankAccount bankAccount;
 
+    public Transaction() {
+    }
+
+    public Transaction(Long accountID, BigDecimal moneyAmmount, TransactionType type, String description, BankAccount bankAccount) {
+        this.accountID = accountID;
+        this.moneyAmmount = moneyAmmount;
+        this.type = type;
+        this.description = description;
+        this.bankAccount = bankAccount;
+    }
+
     public Long getId() {
         return id;
     }
@@ -53,29 +61,16 @@ public class Transaction implements Serializable {
         this.id = id;
     }
 
-    public Integer getTransactionID() {
-        return transactionID;
-    }
-
-    public Transaction transactionID(Integer transactionID) {
-        this.transactionID = transactionID;
-        return this;
-    }
-
-    public void setTransactionID(Integer transactionID) {
-        this.transactionID = transactionID;
-    }
-
-    public Integer getAccountID() {
+    public Long getAccountID() {
         return accountID;
     }
 
-    public Transaction accountID(Integer accountID) {
+    public Transaction accountID(Long accountID) {
         this.accountID = accountID;
         return this;
     }
 
-    public void setAccountID(Integer accountID) {
+    public void setAccountID(Long accountID) {
         this.accountID = accountID;
     }
 
@@ -155,7 +150,6 @@ public class Transaction implements Serializable {
     public String toString() {
         return "Transaction{" +
             "id=" + getId() +
-            ", transactionID=" + getTransactionID() +
             ", accountID=" + getAccountID() +
             ", moneyAmmount=" + getMoneyAmmount() +
             ", type='" + getType() + "'" +

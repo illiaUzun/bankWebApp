@@ -96,6 +96,21 @@ public class BankAccountResource {
     }
 
     /**
+     * GET  /bank-accounts : get all the bankAccounts of special Client.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of bankAccounts in body
+     */
+    @GetMapping("/bank-accounts-ofClient")
+    @Timed
+    public ResponseEntity<List<BankAccount>> getBankAccountsWithId(Pageable pageable, Long id) {
+        log.debug("REST request to get a page of BankAccounts");
+        Page<BankAccount> page = bankAccountService.findAllById(pageable, id);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/bank-accounts-ofClient");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
      * GET  /bank-accounts/:id : get the "id" bankAccount.
      *
      * @param id the id of the bankAccount to retrieve

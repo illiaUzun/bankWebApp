@@ -7,3 +7,7 @@ createdb -h localhost -p 5432 -U postgres springbootdb password 12345
 Затем введите следующую команду находясь в корневой папке проекта для запуска приложения:
 
 mvn spring-boot:run
+
+или
+
+mvn clean compile tomcat:run-war

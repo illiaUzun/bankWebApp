@@ -36,12 +36,9 @@ public class AccountsController {
     @GetMapping("/add_account")
     public String addAccount(@RequestParam("id") Long id, Model model) throws URISyntaxException {
         model.addAttribute("clientID_", id);
-
         model.addAttribute("clientName", clService.findOne(id).get().getClientName());
-
         BankAccount bankAccount = new BankAccount();
         bankAccount.setClientID(id);
-
         clService.findOne(id).get().getBankAccounts().add(bankAccount);
         System.out.println(clService.findOne(id).get().getBankAccounts().size());
         model.addAttribute("account", bankAccount);

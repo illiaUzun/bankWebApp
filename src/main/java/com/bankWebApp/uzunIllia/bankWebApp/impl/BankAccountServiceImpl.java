@@ -111,5 +111,7 @@ public class BankAccountServiceImpl implements BankAccountService {
     public void transaction(Long idA, Long idB, BigDecimal moneyAmmount) {
         BankAccount A =  bankAccountRepository.findById(idA).get();
         BankAccount B =  bankAccountRepository.findById(idB).get();
+        A.setMoneyAmmount(A.getMoneyAmmount().subtract(moneyAmmount));
+        B.setMoneyAmmount(B.getMoneyAmmount().add(moneyAmmount));
     }
 }

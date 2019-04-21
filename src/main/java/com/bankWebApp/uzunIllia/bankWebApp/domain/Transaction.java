@@ -4,6 +4,7 @@ import com.bankWebApp.uzunIllia.bankWebApp.domain.enumeration.TransactionType;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import javax.validation.constraintvalidation.SupportedValidationTarget;
@@ -29,6 +30,10 @@ public class Transaction implements Serializable {
     @Column(name = "account_id")
     private Long accountID;
 
+    @Nullable
+    @Column(name = "account_id_B")
+    private Long accountIdB;
+
     @Column(name = "money_ammount", precision = 10, scale = 2)
     private BigDecimal moneyAmmount;
 
@@ -46,12 +51,21 @@ public class Transaction implements Serializable {
     public Transaction() {
     }
 
-    public Transaction(Long accountID, BigDecimal moneyAmmount, TransactionType type, String description, BankAccount bankAccount) {
+    public Transaction(Long accountID, Long accountIdB, BigDecimal moneyAmmount, TransactionType type, String description, BankAccount bankAccount) {
         this.accountID = accountID;
+        this.accountIdB = accountIdB;
         this.moneyAmmount = moneyAmmount;
         this.type = type;
         this.description = description;
         this.bankAccount = bankAccount;
+    }
+
+    public Long getAccountIdB() {
+        return accountIdB;
+    }
+
+    public void setAccountIdB(Long accountIdB) {
+        this.accountIdB = accountIdB;
     }
 
     public Long getId() {

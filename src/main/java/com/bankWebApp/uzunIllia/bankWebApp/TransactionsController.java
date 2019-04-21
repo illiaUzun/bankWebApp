@@ -52,9 +52,10 @@ public class TransactionsController {
     }
 
     @GetMapping("/add_transaction")
-    public String addTransaction(Long id, Model model) throws URISyntaxException {
-        model.addAttribute("transaction", new Transaction());
-
+    public String addTransaction(@RequestParam(value ="id", defaultValue = "") Long id ,  Model model) throws URISyntaxException {
+        Transaction transaction = new Transaction();
+        transaction.setAccountID(id);
+        model.addAttribute("transaction", transaction);
         model.addAttribute("allTypes", TransactionType.values());
         return "add_transaction";
     }
@@ -63,7 +64,6 @@ public class TransactionsController {
     public String submit(@ModelAttribute Transaction transaction, Model model) throws URISyntaxException {
         trResource.createTransaction(transaction);
         Long trans = transaction.getAccountID();
-
         if (transaction.getType() == TransactionType.INCOME){
             service.income(trans, transaction.getMoneyAmmount());
         } else {
@@ -71,6 +71,33 @@ public class TransactionsController {
         }
         return "redirect:/";
     }
+
+
+    @GetMapping("/transfer")
+    public String addTransfer(@RequestParam("id") Long id, Model model) throws URISyntaxException {
+
+        Transaction transaction = new Transaction();
+        transaction.setAccountID(id);
+
+        model.addAttribute("transaction", transaction);
+
+        return "add_transaction2";
+    }
+
+
+    @PostMapping("/transfer")
+    public String submitTransfer(@ModelAttribute Transaction transaction, Model model) throws URISyntaxException {
+
+        trResource.createTransaction(transaction);
+
+        Long transA = transaction.getAccountID();
+        Long transB = transaction.getAccountIdB();
+
+        service.transaction(transA, transB, transaction.getMoneyAmmount());
+
+        return "redirect:/";
+    }
+
 
     @GetMapping("/transactions")
     public String index(Long id, Model model) {

@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 /**
@@ -54,4 +55,10 @@ public interface BankAccountService {
      * @param id the id of the entity
      */
     void delete(Long id);
+
+    void chargeOff(Long id, BigDecimal moneyAmmount);
+
+    void income(Long id, BigDecimal moneyAmmount);
+
+    void transaction(Long idA, Long idB, BigDecimal moneyAmmount);
 }

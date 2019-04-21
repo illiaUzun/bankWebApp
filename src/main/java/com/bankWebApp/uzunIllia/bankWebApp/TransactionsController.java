@@ -22,18 +22,32 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Controller
 public class TransactionsController {
 
     private TransactionService trService;
     private TransactionResource trResource;
+    private BankAccountService service;
+    private ClientServiceImpl clService;
+    private BankAccountResource bankAccountResource;
+    private ClientResource clientResource;
 
     @Autowired
-    public void setService(TransactionService trService, TransactionResource trResource) {
-        this.trResource = trResource;
+    public void setService(BankAccountServiceImpl service, ClientServiceImpl clService, TransactionService trService) {
+        this.service = service;
+        this.clService = clService;
+
+        clientResource = new ClientResource(clService);
+        bankAccountResource = new BankAccountResource(service);
+
+
+        this.trResource = new TransactionResource(trService);
         this.trService = trService;
     }
 
@@ -48,6 +62,13 @@ public class TransactionsController {
     @PostMapping("/add_transaction")
     public String submit(@ModelAttribute Transaction transaction, Model model) throws URISyntaxException {
         trResource.createTransaction(transaction);
+        Long trans = transaction.getAccountID();
+
+        if (transaction.getType() == TransactionType.INCOME){
+            service.income(trans, transaction.getMoneyAmmount());
+        } else {
+            service.chargeOff(trans, transaction.getMoneyAmmount());
+        }
         return "redirect:/";
     }
 

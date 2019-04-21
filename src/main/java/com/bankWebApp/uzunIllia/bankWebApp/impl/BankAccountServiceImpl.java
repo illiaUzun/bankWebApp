@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 /**
@@ -90,5 +91,25 @@ public class BankAccountServiceImpl implements BankAccountService {
     public void delete(Long id) {
         log.debug("Request to delete BankAccount : {}", id);
         bankAccountRepository.deleteById(id);
+    }
+
+    @Override
+    public void chargeOff(Long id, BigDecimal moneyAmmount) {
+        BankAccount ba =  bankAccountRepository.findById(id).get();
+        ba.setMoneyAmmount(ba.getMoneyAmmount().subtract(moneyAmmount));
+        bankAccountRepository.saveAndFlush(ba);
+    }
+
+    @Override
+    public void income(Long id, BigDecimal moneyAmmount) {
+        BankAccount ba =  bankAccountRepository.findById(id).get();
+        ba.setMoneyAmmount(ba.getMoneyAmmount().add(moneyAmmount));
+        bankAccountRepository.saveAndFlush(ba);
+    }
+
+    @Override
+    public void transaction(Long idA, Long idB, BigDecimal moneyAmmount) {
+        BankAccount A =  bankAccountRepository.findById(idA).get();
+        BankAccount B =  bankAccountRepository.findById(idB).get();
     }
 }

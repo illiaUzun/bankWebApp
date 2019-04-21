@@ -42,6 +42,7 @@ public class AccountsController {
         BankAccount bankAccount = new BankAccount();
         bankAccount.setClientID(id);
 
+        clService.findOne(id).get().getBankAccounts().add(bankAccount);
         model.addAttribute("account", bankAccount);
         return "add_account";
     }

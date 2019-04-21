@@ -26,7 +26,7 @@ public class BankAccount implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "client_id", insertable = false, updatable = false)
+    @Column(name = "id_client")
     private Long clientID;
 
     @Column(name = "money_ammount", precision = 10, scale = 2)

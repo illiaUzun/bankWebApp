@@ -47,7 +47,7 @@ public class AccountsController {
     }
 
     @PostMapping("/add_account")
-    public String greetingSubmit(@RequestParam("id") Long id, @ModelAttribute BankAccount account, Model model) throws URISyntaxException {
+    public String greetingSubmit(@ModelAttribute BankAccount account, Model model) throws URISyntaxException {
         bankAccountResource.createBankAccount(account);
         return "redirect:/";
     }

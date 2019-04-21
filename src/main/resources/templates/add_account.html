@@ -18,7 +18,7 @@
         <p class="lead">Заполните поля и нажмите кнопку 'Добавить счет'</p>
     </div>
 
-    <form enctype="multipart/form-data" action="#" th:action="@{/add_account(id=${clientID_})}" th:object="${account}" method="post"
+    <form enctype="multipart/form-data" action="#" th:action="@{/add_account}" th:object="${account}" method="post"
           class="needs-validation" novalidate>
         <div class="row">
             <div class="col-md-12">

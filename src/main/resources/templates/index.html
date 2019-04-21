@@ -22,11 +22,11 @@
 
     <div class="collapse navbar-collapse" id="navbarsExample05">
         <ul class="navbar-nav mr-auto">
-            <!--<li class="nav-item">-->
-                <!--<a class="nav-link" href="#">Главная</a>-->
-            <!--</li>-->
             <li class="nav-item active">
-                <a class="nav-link" href="#">Клиенты банка<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/">Клиенты банка<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/transactions">История транзакций<span class="sr-only">(current)</span></a>
             </li>
         </ul>
         <form class="form-inline mt-2 mt-md-0">
@@ -72,7 +72,7 @@
                 <td class="align-middle"><span th:text="${client.id}"/></td>
                 <td class="align-middle"><span th:text="${client.clientName}"/></td>
                 <td class="align-middle"><span th:text="${client.clientAge}"/></td>
-                <td class="align-middle"><span th:text="${client.getAccountNum()}"/></td>
+                <td class="align-middle"><span th:text="${client.getBankAccounts().size()}"/></td>
                 <td class="align-middle">
                     <a th:href="@{~/accounts(id=${client.id})}" class="btn btn-lg btn-block btn-outline-primary" role="button"
                        aria-disabled="true">Счета</a>

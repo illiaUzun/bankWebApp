@@ -43,14 +43,17 @@ public class AccountsController {
         bankAccount.setClientID(id);
 
         clService.findOne(id).get().getBankAccounts().add(bankAccount);
+        System.out.println(clService.findOne(id).get().getBankAccounts().size());
         model.addAttribute("account", bankAccount);
         return "add_account";
     }
 
     @PostMapping("/add_account")
     public String greetingSubmit(@ModelAttribute BankAccount account, Model model) throws URISyntaxException {
+        Long clientID = account.getClientID();
         bankAccountResource.createBankAccount(account);
-        return "redirect:/";
+
+        return "redirect:/accounts?id="+clientID;
     }
 
     @GetMapping("/accounts")

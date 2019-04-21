@@ -9,33 +9,91 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <title>Выполнение новой транзакции</title>
+    <title>Добавление новой транзакции</title>
 </head>
+
+
+
 <body class="bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Банк</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05"
+            aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExample05">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Клиенты банка<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/transactions">История транзакций<span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+        <form class="form-inline mt-2 mt-md-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Введите текст" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
+        </form>
+    </div>
+</nav>
 <div class="container">
     <div class="py-5 text-center">
-        <h2>Добавление новой транзакции</h2>
-        <p class="lead">Заполните поля и нажмите кнопку 'Новая транзакция'</p>
+        <h2>Новая транзакция</h2>
+        <p class="lead">Заполните поля и нажмите кнопку 'Провести операцию'</p>
     </div>
 
+    <form enctype="multipart/form-data" action="#" th:action="@{/add_transaction}" th:object="${transaction}" method="post"
+          class="needs-validation" novalidate>
+        <div class="row">
+            <div class="col-md-12">
+                <h4 class="mb-3">Поля для заполнения</h4>
+
+                <div class="row">
 
 
+                    <div class="col-md-4 mb-3">
+                        <label for="accountID">ID счета - получателя средств</label>
+                        <input th:field="*{accountID}" type="text" class="form-control" id="accountID"
+                               placeholder=""
+                               value="" required>
+                    </div>
 
+                    <div class="col-md-4 mb-3">
+                        <label for="operationType">Тип операции</label>
+                        <select th:field="*{type}">
+                            <option id="operationType"
+                                    value="" required
+                                    th:each="type:${allTypes}"
+                                    th:value="${type}"
+                                    th:text="${type}"></option>
+                        </select>
+                    </div>
 
+                    <div class="col-md-4 mb-3">
+                        <label for="moneyAmmount">Количество денег</label>
+                        <input th:field="*{moneyAmmount}" type="text" class="form-control" id="moneyAmmount"
+                               placeholder=""
+                               value="" required>
+                    </div>
 
+                    <div class="col-md-4 mb-3">
+                        <label for="description">Описание операции</label>
+                        <input th:field="*{description}" type="text" class="form-control" id="description"
+                               placeholder=""
+                               value="" required>
+                    </div>
 
+                </div>
 
+                <hr class="mb-4">
+                <button class="btn btn-primary btn-lg btn-block" type="submit" value="Submit">Провести операцию</button>
+    </form>
+</div>
+</div>
+</div>
 
-
-
-
-
-
-
-
-
-
-
+<br/><br/><br/>
 
 
 <!-- Optional JavaScript -->

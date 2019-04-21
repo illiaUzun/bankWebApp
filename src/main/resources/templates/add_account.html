@@ -14,11 +14,12 @@
 <body class="bg-light">
 <div class="container">
     <div class="py-5 text-center">
-        <h2>Открытие счета</h2>
+        <h2>Открытие счета клиента <span th:text="${clientName}"/></h2>
         <p class="lead">Заполните поля и нажмите кнопку 'Добавить счет'</p>
     </div>
 
-    <form enctype="multipart/form-data" action="#" th:action="@{/add_account}" th:object="${account}" method="post" class="needs-validation" novalidate>
+    <form enctype="multipart/form-data" action="#" th:action="@{/add_account(id=${clientID_})}" th:object="${account}" method="post"
+          class="needs-validation" novalidate>
         <div class="row">
             <div class="col-md-12">
                 <h4 class="mb-3">Поля для заполнения</h4>
@@ -26,8 +27,16 @@
                 <div class="row">
 
                     <div class="col-md-4 mb-3">
+                        <label for="clientName">id клиента</label>
+                        <input th:field="*{clientID}" type="text" class="form-control" id="clientID"
+                               placeholder="" readonly
+                               value="" required>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
                         <label for="clientName">Количество денег на счету</label>
-                        <input th:field="*{moneyAmmount}" type="text" class="form-control" id="clientName" placeholder=""
+                        <input th:field="*{moneyAmmount}" type="text" class="form-control" id="clientName"
+                               placeholder=""
                                value="" required>
                     </div>
 

@@ -39,18 +39,16 @@
 <div class="container">
 
     <div class="py-5 text-center">
-        <h2>Просмотр инфорамации о счетах клиента <span></span></h2>
-        <p class="lead">На данной странице вы можете посмотреть информацию о счетах клиента <span></span> </p>
+        <h2>Просмотр инфорамации о счетах клиента <span th:text="${clientName}"/></h2>
+        <p class="lead">На данной странице вы можете посмотреть информацию о счетах клиента <span th:text="${clientName}"/> </p>
     </div>
 
     <div class="row">
         <div class="col">
-            <h2>Все клиенты:</h2>
+            <h2>Все счета:</h2>
         </div>
         <div class="col col-lg-3">
-            <!--хз почему не получается тут получать id-->
-            <!--<a th:href="@{~/add_account(id=${client.id})}" class="btn btn-lg btn-block btn-outline-primary" role="button"-->
-            <a th:href="@{~/add_account(id=${1})}" class="btn btn-lg btn-block btn-outline-primary" role="button"
+            <a th:href="@{~/add_account(id=${clientID})}" class="btn btn-lg btn-block btn-outline-primary" role="button"
                aria-disabled="true">Добавить счет</a>
         </div>
 
@@ -67,13 +65,11 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="account : ${accounts}">
+            <tr th:each="account:${accounts}">
 
                 <!--Так должно быть!!!-->
-                <!--<td class="align-middle"><span th:text="${account.id}"/></td>-->
-                <!--<td class="align-middle"><span th:text="${account.moneyAmmount}"/></td>-->
-                <td class="align-middle"><span th:text="${account}"/></td>
-                <td class="align-middle"><span th:text="${account}"/></td>
+                <td class="align-middle"><span th:text="${account.id}"/></td>
+                <td class="align-middle"><span th:text="${account.moneyAmmount}"/></td>
                 <td class="align-middle">
                     <a th:href="@{~/accounts}" class="btn btn-lg btn-block btn-outline-primary" role="button"
                        aria-disabled="true">Транзакции</a>

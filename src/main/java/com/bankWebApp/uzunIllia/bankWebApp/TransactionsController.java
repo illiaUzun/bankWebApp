@@ -2,6 +2,7 @@ package com.bankWebApp.uzunIllia.bankWebApp;
 
 
 import com.bankWebApp.uzunIllia.bankWebApp.domain.BankAccount;
+import com.bankWebApp.uzunIllia.bankWebApp.domain.Client;
 import com.bankWebApp.uzunIllia.bankWebApp.impl.BankAccountServiceImpl;
 import com.bankWebApp.uzunIllia.bankWebApp.impl.ClientServiceImpl;
 import com.bankWebApp.uzunIllia.bankWebApp.rest.BankAccountResource;

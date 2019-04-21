@@ -28,28 +28,35 @@ public class AccountsController {
     @Autowired
     public void setService(BankAccountServiceImpl service, ClientServiceImpl clService) {
         this.service = service;
+        this.clService = clService;
         clientResource = new ClientResource(clService);
         bankAccountResource = new BankAccountResource(service);
     }
 
     @GetMapping("/add_account")
-    public String addAccount(Model model) {
-        model.addAttribute("account", new BankAccount());
+    public String addAccount(@RequestParam("id") Long id, Model model) throws URISyntaxException {
+        model.addAttribute("clientID_", id);
+
+        model.addAttribute("clientName", clService.findOne(id).get().getClientName());
+
+        BankAccount bankAccount = new BankAccount();
+        bankAccount.setClientID(id);
+
+        model.addAttribute("account", bankAccount);
         return "add_account";
     }
 
     @PostMapping("/add_account")
-    public String greetingSubmit(@RequestParam("id") Long id, @ModelAttribute BankAccount account,  Model model) throws URISyntaxException {
-        account.setId(id);
+    public String greetingSubmit(@RequestParam("id") Long id, @ModelAttribute BankAccount account, Model model) throws URISyntaxException {
         bankAccountResource.createBankAccount(account);
-
         return "redirect:/";
     }
 
     @GetMapping("/accounts")
     public String index(@RequestParam("id") Long id, Model model) {
-        model.addAttribute("accounts", bankAccountResource.getBankAccountsWithId(Pageable.unpaged(), id));
-        model.addAttribute("client", clientResource.getClient(id));
+        model.addAttribute("accounts", service.findAllById(Pageable.unpaged(), id));
+        model.addAttribute("clientName", clService.findOne(id).get().getClientName());
+        model.addAttribute("clientID", id);
         return "accounts";
     }
 
